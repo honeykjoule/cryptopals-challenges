@@ -1,4 +1,3 @@
-
 def hex_to_base64(hex_str):
 
   hex_pairs = [hex_str[i:i+2] for i in range(0, len(hex_str), 2)]
