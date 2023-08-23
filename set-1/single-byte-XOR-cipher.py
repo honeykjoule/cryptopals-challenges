@@ -39,4 +39,6 @@ def single_byte_XOR_cipher(hex_str):
       
     
 hex_str = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
-single_byte_XOR_cipher(hex_str)
+
+if __name__ == "__main__":
+  single_byte_XOR_cipher(hex_str)
