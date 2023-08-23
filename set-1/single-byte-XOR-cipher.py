@@ -5,10 +5,14 @@ def single_byte_XOR_cipher(hex_str):
   byte_array = bytearray(integer_list)
 
 
-  for i in range(0, 255):
-
-    cipher = byte(i)
+  for key in range(256):
     plaintext_result = ''
 
+    for byte in byte_array:
+      xor_byte_result = key ^ byte
+      plaintext_result += chr(xor_byte_result)
 
-    for i in 
+    print(plaintext_result)
+
+hex_str = '1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736'
+single_byte_XOR_cipher(hex_str)
