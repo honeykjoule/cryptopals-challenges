@@ -1,7 +1,6 @@
 def convert_base64_to_bytes(base64_str):
     base64_alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
     complete_binary_str = ''
-    padding_count = base64_str.count('=')
     base64_str = base64_str.rstrip('=')
 
     for char in base64_str:
