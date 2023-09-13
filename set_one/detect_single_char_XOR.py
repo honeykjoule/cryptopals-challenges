@@ -4,7 +4,7 @@ best_key = None
 best_score = 0
 best_line = ''
 best_encrypted_line = ''
-filename = 'set-1/challenge_data_4.txt'
+filename = 'set_one/challenge_data_4.txt'
 
 
 def score_text(text, frequency_table):

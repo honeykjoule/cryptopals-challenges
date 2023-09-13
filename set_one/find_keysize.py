@@ -19,7 +19,7 @@ def find_keysize():
                 cumulative_hamming_distance += calculate_hamming_distance(keysized_blocks[i], keysized_blocks[j])
                 number_of_blocks += 1
 
-        scored_keysize_values[keysize] = (distance / count) / keysize
+        scored_keysize_values[keysize] = (cumulative_hamming_distance / number_of_blocks) / keysize
 
 
     if not scored_keysize_values:
@@ -31,4 +31,5 @@ def find_keysize():
 
     return best_keysize
 
-find_keysize()
+if __name__ == '__main__':
+    find_keysize()
