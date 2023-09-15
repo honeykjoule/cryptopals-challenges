@@ -5,3 +5,6 @@ def fixed_xor(buffer1: bytes, buffer2: bytes) -> bytes:
     for b1, b2 in zip(buffer1, buffer2):
         xor_result.append(b1 ^ b2)
     return bytes(xor_result)
+
+def single_byte_xor(input_bytes: bytes, key:int) -> bytes:
+    return bytes([b ^ key for b in input_bytes])
