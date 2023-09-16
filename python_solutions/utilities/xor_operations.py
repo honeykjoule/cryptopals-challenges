@@ -8,3 +8,14 @@ def fixed_xor(buffer1: bytes, buffer2: bytes) -> bytes:
 
 def single_byte_xor(input_bytes: bytes, key:int) -> bytes:
     return bytes([b ^ key for b in input_bytes])
+
+def repeating_key_xor(text_bytes: bytes, key_bytes: bytes) -> bytes:
+    encrypted_bytes = bytearray()
+    for i, byte in enumerate(text_bytes):
+        key_index = i % len(key_bytes)
+        encrypted_byte = byte ^ key_bytes[key_index]
+        encrypted_bytes.append(encrypted_byte)
+    return encrypted_bytes
+
+def convert_bytes_to_hex(byte_array: bytes) -> str:
+    return ''.join('{:02x}'.format(byte) for byte in byte_array)
