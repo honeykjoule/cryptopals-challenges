@@ -35,3 +35,26 @@ def convert_bytes_to_base64(byte_data: bytes) -> str:
             base64_string = base64_string[:-padding_chars] + '=' * padding_chars
         
     return base64_string
+
+def convert_base64_to_bytes(base64_string: str) -> bytes:
+    base64_alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+    base64_dict = {char: index for index, char in enumerate(base64_alphabet)}
+    complete_binary_list = []
+    padding_length = base64_string.count('=')
+    base64_string = base64_string.strip('=')
+
+    for char in base64_string:
+        binary_representation = bin(base64_dict[char])[2:].zfill(6)
+        complete_binary_list.append(binary_representation)
+
+    complete_binary_str = ''.join(complete_binary_list)
+    if padding_length:
+        complete_binary_str = complete_binary_str[:-(padding_length * 2)]
+
+    byte_chunks = [
+        complete_binary_str[i:i+8] 
+        for i in range(0, len(complete_binary_str), 8)
+    ]
+    byte_values = [int(chunk, 2) for chunk in byte_chunks]
+
+    return bytes(byte_values)
