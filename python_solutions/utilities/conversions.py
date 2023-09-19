@@ -1,9 +1,5 @@
-def convert_hex_to_bytes(hex_string: str) -> bytes:
-    byte_array = bytearray()
-    for i in range(0, len(hex_string), 2):
-        byte = int(hex_string[i:i+2], 16)
-        byte_array.append(byte)
-    return bytes(byte_array)
+def convert_bytes_to_hex(byte_array: bytes) -> str:
+    return ''.join('{:02x}'.format(byte) for byte in byte_array)
 
 def convert_bytes_to_base64(byte_data: bytes) -> str:
     base64_alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
@@ -35,6 +31,13 @@ def convert_bytes_to_base64(byte_data: bytes) -> str:
             base64_string = base64_string[:-padding_chars] + '=' * padding_chars
         
     return base64_string
+
+def convert_hex_to_bytes(hex_string: str) -> bytes:
+    byte_array = bytearray()
+    for i in range(0, len(hex_string), 2):
+        byte = int(hex_string[i:i+2], 16)
+        byte_array.append(byte)
+    return bytes(byte_array)
 
 def convert_base64_to_bytes(base64_string: str) -> bytes:
     base64_alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'

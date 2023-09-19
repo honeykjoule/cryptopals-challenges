@@ -1,6 +1,6 @@
 from utilities.conversions import convert_hex_to_bytes
 from utilities.xor_operations import single_byte_xor
-from utilities.frequency_analysis import score_text
+from utilities.frequency_analysis import score_text_etaoin_shrdlu
 
 def main():
     best_key = None
@@ -13,10 +13,6 @@ def main():
             line = line.strip()
             line_bytes = convert_hex_to_bytes(line)
 
-            frequency_table = {}
-            for index, char in enumerate('ETAOIN SHRDLU'):
-                frequency_table[char] = 12 - index
-
             best_byte_score = 0
             best_byte_key = None
             best_decryption = ''
@@ -28,7 +24,7 @@ def main():
                 except UnicodeDecodeError:
                     continue
 
-                current_byte_score = score_text(plaintext_result, frequency_table)
+                current_byte_score = score_text_etaoin_shrdlu(plaintext_result)
                 if current_byte_score > best_score:
                     best_byte_score = current_byte_score
                     best_byte_key = key
