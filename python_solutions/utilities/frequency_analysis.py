@@ -1,19 +1,10 @@
-def score_text_etaoin_shrdlu(text: str) -> int:
-    frequency_table = {
-        'E': 12,
-        'T': 11,
-        'A': 10,
-        'O': 9,
-        'I': 8,
-        'N': 7,
-        ' ': 6,
-        'S': 5,
-        'H': 4,
-        'R': 3,
-        'D': 2,
-        'L': 1,
-        'U': 0
-    }
+def generate_frequency_table() -> dict:
+    table = {}
+    for index, char in enumerate('ETAOIN SHRDLU'):
+        table[char] = 12 - index
+    return table
+
+def score_text(text: str, frequency_table: dict) -> int:
     score = 0
     for char in text.upper():
         score += frequency_table.get(char, 0)

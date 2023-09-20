@@ -1,12 +1,14 @@
 from utilities.conversions import convert_hex_to_bytes
 from utilities.xor_operations import single_byte_xor
-from utilities.frequency_analysis import score_text_etaoin_shrdlu
+from utilities.frequency_analysis import generate_frequency_table, score_text
 
 def main():
     best_key = None
     best_score = 0
     best_decrypted_line = ''
     line_number = 0
+    frequency_table = generate_frequency_table()
+
     with open('challenge_data/set1_challenge4.txt', 'r') as file:
         for line in file:
             line_number += 1
@@ -24,7 +26,7 @@ def main():
                 except UnicodeDecodeError:
                     continue
 
-                current_byte_score = score_text_etaoin_shrdlu(plaintext_result)
+                current_byte_score = score_text(plaintext_result, frequency_table)
                 if current_byte_score > best_score:
                     best_byte_score = current_byte_score
                     best_byte_key = key

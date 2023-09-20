@@ -1,3 +1,5 @@
+from utilities.frequency_analysis import score_text
+
 def fixed_xor(buffer1: bytes, buffer2: bytes) -> bytes:
     if len(buffer1) != len(buffer2):
         raise ValueError('Both buffers should be of equal length')
@@ -16,3 +18,25 @@ def repeating_key_xor(text_bytes: bytes, key_bytes: bytes) -> bytes:
         encrypted_byte = byte ^ key_bytes[key_index]
         encrypted_bytes.append(encrypted_byte)
     return encrypted_bytes
+
+def detect_single_char_xor(
+        byte_array: bytearray,
+        frequency_table: dict
+    ) -> tuple[int, str]:
+    
+    best_score = 0
+    best_key = -1
+    best_decryption = ''
+
+    for key in range(256):
+        plaintext_result = ''.join(
+            chr(key ^ byte) for byte in byte_array
+        )
+        current_score = score_text(plaintext_result, frequency_table)
+        
+        if current_score > best_score:
+            best_score = current_score
+            best_key = key
+            best_decryption = plaintext_result
+    
+    return best_key, best_decryption

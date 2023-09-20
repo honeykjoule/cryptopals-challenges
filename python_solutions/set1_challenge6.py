@@ -1,5 +1,5 @@
 from utilities.conversions import convert_base64_to_bytes
-from utilities.find_keysize import find_keysize
+from utilities.find_keysize import find_keysize, find_repeating_key
 from utilities.xor_operations import repeating_key_xor
 
 def main():
@@ -16,4 +16,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
