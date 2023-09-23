@@ -46,7 +46,10 @@ def key_expansion(key: bytes) -> bytearray:
 
 
 def add_round_key(state: list, round_key: bytes, round_number: int):
-    pass #TODO implement
+    start_idx = round_number * 16
+    for i in range(4):
+        for j in range(4):
+            state[i][j] ^= round_key[start_idx + i * 4 + j]
 
 def inv_shit_rows(state: list):
     pass #TODO implement
