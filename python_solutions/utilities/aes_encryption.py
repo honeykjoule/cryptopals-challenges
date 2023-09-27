@@ -35,8 +35,7 @@ def inv_shit_rows(state: list):
 def inv_sub_bytes(state: list):
     for i in range(4):
         for j in range(4):
-            pass
-#            state[i][j] = 
+            state[i][j] = INVERSE_S_BOX[state[i][j]]
 
 def inv_mix_columns(state: list):
     pass #TODO implement
