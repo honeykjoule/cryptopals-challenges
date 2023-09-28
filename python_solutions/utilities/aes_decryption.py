@@ -1,4 +1,5 @@
 from constants import S_BOX, INVERSE_S_BOX, RCON
+from aes_helper import galois_field_multiplication
 
 def sub_word(word: bytes) -> bytearray:
     return bytearray([S_BOX[b] for b in word])
@@ -38,7 +39,23 @@ def inv_sub_bytes(state: list):
             state[i][j] = INVERSE_S_BOX[state[i][j]]
 
 def inv_mix_columns(state: list):
-    pass #TODO implement
+    A = [
+        [0x0e, 0x0b, 0x0d, 0x09],
+        [0x09, 0x0e, 0x0b, 0x0d],
+        [0x0d, 0x09, 0x0e, 0x0b],
+        [0x0b, 0x0d, 0x09, 0x0e]
+    ]
+    temp_state = [[0 for _ in range(4)] for _ in range(4)]
+    for i in range(4):
+        for j in range(4):
+            new_val = 0
+            for k in range(4):
+                new_val ^= galois_field_multiplication(A[i][k], state[k][j])
+            temp_state[i][j] = new_val
+
+    for i in range(4):
+        for j in range(4):
+            state[i][j] = temp_state[i][j]
 
 def convert_state_to_bytes(state: list):
     pass #TODO implement
